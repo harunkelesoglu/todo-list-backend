@@ -18,8 +18,8 @@ const ToDoSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ['complete', 'incomplete'],
-    default: 'incomplete',
+    enum: ['completed', 'incompleted'],
+    default: 'incompleted',
   },
   createdAt: {
     type: Date,
@@ -33,15 +33,6 @@ const ToDoSchema = new Schema({
 
 const ToDo = mongoose.model('ToDo', ToDoSchema, 'todos');
 
-// eslint-disable-next-line func-names
-ToDoSchema.statics.getAllToDos = function () {
-  return ToDo.find();
-};
-
-// eslint-disable-next-line func-names
-ToDoSchema.statics.newToDo = function (todo) {
-  return todo.save();
-};
 
 // eslint-disable-next-line eol-last
 module.exports = ToDo;
