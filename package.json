@@ -16,7 +16,7 @@
     "nodemon": "^1.19.1"
   },
   "scripts": {
-    "start": "nodemon.js app.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Harun KELESOGLU <harun.kelesoglu19@gmail.com> (https://medium.com/@harunkeleolu)",
