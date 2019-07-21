@@ -1,0 +1,6 @@
+{
+    "db":{
+        "development":"mongodb://admin:demo1234@ds351827.mlab.com:51827/getir-todos",
+        "production":"mongodb://admin:demo1234@ds351827.mlab.com:51827/getir-todos"
+    }
+}
