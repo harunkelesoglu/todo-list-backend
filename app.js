@@ -12,10 +12,7 @@ app.use(express.json());
 app.use(logger('dev'));
 
 app.get('/', (req, res) => {
-  response.statusCode = 200;
-  response.status = true;
-  response.message = 'Welcome to app';
-  res.status(response.statusCode).json(response);
+  res.send('client/build/index.html');
 });
 app.use('/api/v1', ToDoController);
 app.use((err, req, res) => {

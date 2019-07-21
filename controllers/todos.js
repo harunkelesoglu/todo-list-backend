@@ -3,17 +3,19 @@ const express = require('express');
 const ToDo = require('./../models/todos');
 
 const router = express.Router();
-const response = {};
+let response = {};
 // get all tasks
 router.get('/todos', (req, res, next) => {
   ToDo.find()
     .sort({ status: -1 })
     .select({ __v: 0 })
     .then((data) => {
-      response.statusCode = 200;
-      response.status = true;
-      response.message = 'Success';
-      response.data = data;
+      response = {
+        statusCode: 200,
+        status: true,
+        message: 'Success',
+        data,
+      };
       res.status(response.statusCode).json(response);
     })
     .catch(next);
@@ -24,10 +26,12 @@ router.post('/todos', (req, res, next) => {
   const todo = new ToDo(req.body);
   todo.save()
     .then((data) => {
-      response.statusCode = 200;
-      response.status = true;
-      response.message = 'Success';
-      response.data = data;
+      response = {
+        statusCode: 200,
+        status: true,
+        message: 'Success',
+        data,
+      };
       res.status(response.statusCode).json(response);
     })
     .catch(next);
@@ -41,14 +45,18 @@ router.put('/todos/:_id', (req, res, next) => {
   ToDo.findOneAndUpdate({ _id }, { $set: todos }, { new: true })
     .then((data) => {
       if (!data) {
-        response.statusCode = 404;
-        response.status = false;
-        response.message = 'ToDo Not Found';
+        response = {
+          statusCode: 404,
+          status: false,
+          message: 'Todo Not Found',
+        };
       }
-      response.statusCode = 200;
-      response.staus = true;
-      response.message = 'Success';
-      response.data = data;
+      response = {
+        statusCode: 200,
+        status: true,
+        message: 'Success',
+        data,
+      };
       res.status(response.statusCode).json(response);
     })
     .catch(next);
@@ -59,15 +67,18 @@ router.delete('/todos/:_id', (req, res, next) => {
   ToDo.remove({ _id })
     .then((data) => {
       if (data.deletedCount === 0) {
-        response.statusCode = 404;
-        response.status = false;
-        response.message = 'Todo not found';
+        response = {
+          statusCode: 404,
+          status: true,
+          message: 'Todo Not Found',
+        };
         return res.status(response.statusCode).json(response);
       }
-      response.statusCode = 200;
-      response.status = true;
-      response.message = 'Success';
-      response.data = data;
+      response = {
+        statusCode: 200,
+        status: true,
+        message: 'Success',
+      };
       return res.status(response.statusCode).json(response);
     })
     .catch(next);
